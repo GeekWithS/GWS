@@ -1,6 +1,6 @@
 # Geek With S (GWS)
 
-Official website for Geek With S (GWS).
+Official website for Geek With S (GWS).<br>
 https://geekwiths.github.io/GWS
 
 ## About

@@ -3,22 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.jpeg">
 <title>Geek With S (GWS)</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-yH7Gn6G4B6Z/2C4Z0bTUpL3YYZ1q9oXUa7xUJmZ0U7Fp9Rw2Z2Uu6e0Ff9xxUlNc7uBfoydd/2ykA5eGD6xsFw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
 :root {
-  --bg: #0d0d0d;
+  --bg: #080808;
   --bg2: #111111;
   --bg3: #1a1a1a;
-  --card: #161616;
+  --card: #121212;
   --border: #2a2a2a;
-  --red: #b22222;
-  --red-bright: #c0392b;
+  --red: #dc2626;
+  --red-bright: #ef4444;
   --red-glow: rgba(178,34,34,0.18);
   --teal: #0f7c82;
   --text: #e8e8e8;
   --muted: #888;
   --white: #ffffff;
+  --backdrop-filter: blur(20px);
 }
 
 *, *::before, *::after {
@@ -698,6 +702,36 @@ footer {
   nav a.cta-btn { display: inline-flex; }
   .hero h1 { font-size: 44px; }
 }
+
+@media (max-width: 520px) {
+  header { padding: 12px 16px; height: auto; align-items: flex-start; }
+  .logo { gap: 10px; }
+  .hero { padding: 60px 18px; min-height: auto; }
+  .hero-tag { font-size: 11px; padding: 5px 12px; margin-bottom: 20px; }
+  .hero h1 { font-size: 34px; }
+  .hero-desc { font-size: 15px; margin-bottom: 28px; }
+  .hero-btns { flex-direction: column; gap: 12px; }
+  .topic-pills { justify-content: center; gap: 8px; }
+  .pill { padding: 7px 12px; font-size: 12px; }
+  .stats-bar { padding: 24px 16px; gap: 16px; }
+  .stat { max-width: none; padding: 0 10px; }
+  .section-title { font-size: 26px; }
+  .section-desc { font-size: 15px; }
+  .about-text, .founder-card, .cover-item, .vm-card, .contact-item { padding: 22px; }
+  .founders-grid, .vm-grid, .cover-grid { gap: 14px; }
+  .cover-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .cover-item { padding: 18px 14px; }
+  .about-text { font-size: 15px; }
+  .vm-card { padding: 28px 22px; }
+  .contact-links { gap: 12px; }
+  .contact-item { padding: 16px 18px; }
+  .contact-form { margin-top: 20px; }
+  .contact-form input, .contact-form textarea { padding: 11px 12px; font-size: 14px; }
+  .footer-inner { gap: 18px; }
+  .footer-links a { font-size: 13px; }
+  .footer-bottom { gap: 8px; font-size: 12px; padding-top: 18px; }
+  .divider { margin: 0 16px; }
+}
 </style>
 </head>
 <body>
@@ -722,27 +756,25 @@ footer {
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="home">
-  <div class="hero-tag">🇱🇰 Student-Powered Tech Channel · Colombo, Sri Lanka</div>
-  <p class="hero-greeting">Nice to have you here!</p>
+  <div class="hero-tag">Student-Led Technology Media Platform • Sri Lanka</div>
+  <p class="hero-greeting">Welcome to Geek With S</p>
   <h1>We are <span>GWS</span></h1>
   <p class="hero-subtitle" id="typed-text"></p>
   <p class="hero-desc">
-    A student-driven YouTube channel making ICT learning simple,
-    practical and enjoyable — covering Programming, AI, Cyber Security,
-    Web Development, Tech News, and much more.
+    A student-led technology media platform dedicated to making ICT education accessible, practical, and engaging. Through tutorials, project showcases, technology insights, and industry discussions, we help students develop real-world digital skills.
   </p>
   <div class="hero-btns">
-    <a href="#about" class="btn-primary">▶ Explore GWS</a>
-    <a href="#contact" class="btn-outline">Get In Touch →</a>
+    <a href="#about" class="btn-primary">Discover More</a>
+    <a href="#contact" class="btn-outline">Contact Us</a>
   </div>
   <div class="topic-pills">
     <span class="pill">Programming</span>
     <span class="pill">Artificial Intelligence</span>
-    <span class="pill">Cyber Security</span>
+    <span class="pill">Cybersecurity</span>
     <span class="pill">Web Development</span>
+    <span class="pill">Software Engineering</span>
     <span class="pill">Tech News</span>
-    <span class="pill">ICT Tutorials</span>
-    <span class="pill">Robotics</span>
+    <span class="pill">Cloud Computing</span>
     <span class="pill">Innovation</span>
   </div>
 </section>
@@ -758,8 +790,8 @@ footer {
     <div class="stat-label">Topics Covered</div>
   </div>
   <div class="stat">
-    <div class="stat-num" data-count="100">0</div>
-    <div class="stat-label">% Passion</div>
+    <div class="stat-num" id="founded-by">Student</div>
+    <div class="stat-label">Powered</div>
   </div>
   <div class="stat">
     <div class="stat-num" id="founded-year">2026</div>
@@ -792,7 +824,7 @@ footer {
   <div class="founders-grid reveal">
     <div class="founder-card">
       <div class="founder-img-wrap">
-        <img src="sinura.jpeg" alt="Sinura Perera">
+        <img src="sinura.png" alt="Sinura Perera">
       </div>
       <div class="founder-name">Sinura Perera</div>
       <div class="founder-role">
@@ -802,7 +834,7 @@ footer {
         <span class="role-tag">AI & ML</span>
         <span class="role-tag">Cyber Security</span>
       </div>
-      <p class="founder-bio">Graphic Designer, Web Developer, Creative UI/UX Designer, AI & ML Innovator and Enthusiast about Cyber Security.</p>
+      <p class="founder-bio">Specializes in web development, UI/UX design, graphic design, artificial intelligence, and cybersecurity.</p>
     </div>
 
     <div class="founder-card">
@@ -815,7 +847,7 @@ footer {
         <span class="role-tag">Gaming</span>
         <span class="role-tag">App Dev</span>
       </div>
-      <p class="founder-bio">Content Creator and Enthusiast about Technology, Gaming and Web and App Development.</p>
+      <p class="founder-bio">Focused on content creation, software development, and emerging technologies.</p>
     </div>
 
     <div class="founder-card">
@@ -843,14 +875,14 @@ footer {
     <p class="section-desc">Topics and technologies we explore and teach on our channel.</p>
   </div>
   <div class="cover-grid reveal">
-    <div class="cover-item"><span class="cover-icon">💻</span><div class="cover-name">Programming</div></div>
-    <div class="cover-item"><span class="cover-icon">🤖</span><div class="cover-name">Artificial Intelligence</div></div>
-    <div class="cover-item"><span class="cover-icon">🔐</span><div class="cover-name">Cyber Security</div></div>
-    <div class="cover-item"><span class="cover-icon">🌐</span><div class="cover-name">Web Development</div></div>
-    <div class="cover-item"><span class="cover-icon">📰</span><div class="cover-name">Tech News</div></div>
-    <div class="cover-item"><span class="cover-icon">📚</span><div class="cover-name">ICT Tutorials</div></div>
-    <div class="cover-item"><span class="cover-icon">🤖</span><div class="cover-name">Robotics</div></div>
-    <div class="cover-item"><span class="cover-icon">💡</span><div class="cover-name">Innovation</div></div>
+    <div class="cover-item"><i class="fa-solid fa-code cover-icon" aria-hidden="true"></i><div class="cover-name">Programming</div></div>
+    <div class="cover-item"><i class="fa-solid fa-brain cover-icon" aria-hidden="true"></i><div class="cover-name">Artificial Intelligence</div></div>
+    <div class="cover-item"><i class="fa-solid fa-lock cover-icon" aria-hidden="true"></i><div class="cover-name">Cybersecurity</div></div>
+    <div class="cover-item"><i class="fa-solid fa-globe cover-icon" aria-hidden="true"></i><div class="cover-name">Web Development</div></div>
+    <div class="cover-item"><i class="fa-solid fa-newspaper cover-icon" aria-hidden="true"></i><div class="cover-name">Software Engineering</div></div>
+    <div class="cover-item"><i class="fa-solid fa-book cover-icon" aria-hidden="true"></i><div class="cover-name">Tech News</div></div>
+    <div class="cover-item"><i class="fa-solid fa-cloud cover-icon" aria-hidden="true"></i><div class="cover-name">Cloud Computing</div></div>
+    <div class="cover-item"><i class="fa-solid fa-lightbulb cover-icon" aria-hidden="true"></i><div class="cover-name">Innovation</div></div>
   </div>
 </section>
 
@@ -865,7 +897,7 @@ footer {
   </div>
   <div class="vm-grid reveal">
     <div class="vm-card vision">
-      <span class="vm-icon">🎯</span>
+      <i class="fa-solid fa-bullseye vm-icon" aria-hidden="true"></i>
       <div class="vm-label">Vision</div>
       <div class="vm-title">Leading the Way</div>
       <p class="vm-text">
@@ -875,7 +907,7 @@ footer {
       </p>
     </div>
     <div class="vm-card mission">
-      <span class="vm-icon">🚀</span>
+      <i class="fa-solid fa-rocket vm-icon" aria-hidden="true"></i>
       <div class="vm-label">Mission</div>
       <div class="vm-title">Educate &amp; Inspire</div>
       <p class="vm-text">
@@ -893,33 +925,33 @@ footer {
 <section id="contact">
   <div class="contact-inner">
     <div class="section-label" style="justify-content:center;">Contact</div>
-    <h2 class="section-title reveal">Let's Work Together</h2>
-    <p class="section-desc reveal" style="margin:0 auto 0;">Have a collaboration, project idea, or just want to say hi? Reach out!</p>
+    <h2 class="section-title reveal">Get in Touch</h2>
+    <p class="section-desc reveal" style="margin:0 auto 0;">For collaborations, partnerships, project discussions, or general inquiries, feel free to contact our team.</p>
 
     <div class="contact-links reveal">
       <a href="mailto:1geekwiths@gmail.com" class="contact-item">
-        <div class="contact-item-icon">📧</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
         <div class="contact-item-text">
           <div class="contact-item-label">Email</div>
           <div class="contact-item-value">1geekwiths@gmail.com</div>
         </div>
       </a>
       <div class="contact-item" style="cursor:default;">
-        <div class="contact-item-icon">📍</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
         <div class="contact-item-text">
           <div class="contact-item-label">Location</div>
-          <div class="contact-item-value">Colombo, Sri Lanka 🇱🇰</div>
+          <div class="contact-item-value">Colombo, Sri Lanka <i class="fa-solid fa-flag" aria-hidden="true"></i></div>
         </div>
       </div>
       <a href="https://youtube.com/@GeekWithS" target="_blank" class="contact-item">
-        <div class="contact-item-icon">▶</div>
+        <div class="contact-item-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></div>
         <div class="contact-item-text">
           <div class="contact-item-label">YouTube</div>
           <div class="contact-item-value">Geek With S (GWS)</div>
         </div>
       </a>
       <a href="https://github.com/GeekWithS" target="_blank" class="contact-item">
-        <div class="contact-item-icon">🐙</div>
+        <div class="contact-item-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></div>
         <div class="contact-item-text">
           <div class="contact-item-label">GitHub</div>
           <div class="contact-item-value">GeekWithS</div>
@@ -979,7 +1011,7 @@ footer {
   </div>
   <div class="footer-bottom">
     <p>© 2026 <span>Geek With S (GWS)</span> · All Rights Reserved</p>
-    <p>Made with <span>♥</span> in Colombo, Sri Lanka</p>
+    <p>Designed and Developed with <i class="fa-solid fa-heart" aria-hidden="true"></i> by Geek With S</p>
   </div>
 </footer>
 
@@ -989,7 +1021,7 @@ const phrases = [
   "Programming · AI · Cyber Security",
   "Web Development · Tech News",
   "ICT Tutorials · Robotics",
-  "Student-Powered · Sri Lanka 🇱🇰"
+  "Student-Powered · Sri Lanka"
 ];
 let pi = 0, ci = 0, deleting = false;
 const el = document.getElementById('typed-text');
@@ -1084,6 +1116,9 @@ async function handleContactSend() {
     status.textContent = 'Send failed: ' + (err?.text || err?.message || 'Unknown error');
   }
 }
+
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="FFHBJ-umgvX0GvGyQQQDP";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
 </script>
 </body>
 </html>

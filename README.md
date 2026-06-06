@@ -37,6 +37,8 @@ Location: Colombo, Sri Lanka
 
 ## Website
 
+geekwiths.github.io/GWS
+
 Built using:
 - HTML5
 - CSS3

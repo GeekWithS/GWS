@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.jpeg">
+<title>Geek With S (GWS) | Student-Led Tech Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+  --bg: #080808;
+  --bg2: #111111;
+  --bg3: #1a1a1a;
+  --card: #121212;
+  --border: rgba(255, 255, 255, 0.08);
+  --red: #dc2626;
+  --red-bright: #ef4444;
+  --red-glow: rgba(220, 38, 38, 0.15);
+  --teal: #0f7c82;
+  --text: #e8e8e8;
+  --muted: #a0a0a0;
+  --white: #ffffff;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 10px; }
+
+/* ─── NOISE TEXTURE ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1000; opacity: 0.4;
+}
+
+/* ─── HEADER ─── */
+header {
+  background: rgba(8, 8, 8, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 0 5%;
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky; top: 0; z-index: 1000;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo img { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); }
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-text span:first-child { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--red-bright); text-transform: uppercase; letter-spacing: 1px; }
+.logo-text span:last-child { font-size: 16px; font-weight: 800; color: var(--white); }
+
+nav { display: flex; align-items: center; gap: 8px; }
+nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; transition: var(--transition); }
+nav a:hover, nav a.active { color: var(--white); background: var(--bg3); }
+nav .cta-btn { background: var(--red); color: white; margin-left: 10px; }
+nav .cta-btn:hover { background: var(--red-bright); transform: translateY(-1px); }
+
+/* Mobile Toggle */
+.menu-toggle { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: calc(100vh - 72px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 5%; position: relative;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--red-glow); border: 1px solid rgba(220, 38, 38, 0.3);
+  color: var(--red-bright); font-family: 'Space Mono', monospace; font-size: 12px;
+  padding: 8px 20px; border-radius: 100px; margin-bottom: 30px;
+}
+
+.hero h1 { font-size: clamp(40px, 8vw, 90px); font-weight: 800; line-height: 1; color: var(--white); margin-bottom: 20px; letter-spacing: -0.04em; }
+.hero h1 span { color: var(--red-bright); }
+
+.hero-subtitle { font-family: 'Space Mono', monospace; font-size: clamp(14px, 2vw, 18px); color: var(--muted); min-height: 24px; margin-bottom: 30px; }
+.typed-cursor { color: var(--red-bright); animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.hero-desc { max-width: 650px; color: #aaa; font-size: clamp(15px, 1.2vw, 17px); margin-bottom: 40px; }
+.hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 50px; }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: var(--transition); font-size: 15px; }
+.btn-primary { background: var(--red); color: white; }
+.btn-primary:hover { background: var(--red-bright); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3); }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--red); background: var(--red-glow); }
+
+.topic-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; }
+.pill { background: var(--card); border: 1px solid var(--border); color: #888; font-size: 12px; padding: 6px 16px; border-radius: 100px; font-weight: 600; cursor: default; transition: var(--transition); }
+.pill:hover { border-color: var(--red-bright); color: var(--white); background: var(--bg3); }
+
+/* ─── STATS ─── */
+.stats-bar {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  background: var(--bg2); border-block: 1px solid var(--border); padding: 50px 5%; gap: 30px;
+}
+.stat { text-align: center; }
+.stat-num { font-family: 'Space Mono', monospace; font-size: 42px; font-weight: 700; color: var(--red-bright); line-height: 1; }
+.stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; font-weight: 700; }
+
+/* ─── SECTIONS ─── */
+section { padding: 100px 5%; }
+.section-header { max-width: 700px; margin-bottom: 60px; }
+.section-label { font-family: 'Space Mono', monospace; color: var(--red-bright); font-size: 12px; text-transform: uppercase; letter-spacing: 3px; display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.section-label::after { content: ''; height: 1px; flex-grow: 1; background: var(--border); }
+.section-title { font-size: clamp(30px, 4vw, 45px); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+.section-desc { color: var(--muted); font-size: 17px; }
+
+/* About Text */
+.about-card { background: var(--card); border: 1px solid var(--border); padding: clamp(25px, 5vw, 50px); border-radius: 24px; position: relative; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.8; color: #ccc; }
+.about-card b { color: var(--white); }
+
+/* Founders Grid */
+.founders-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+.founder-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 25px; transition: var(--transition); overflow: hidden; }
+.founder-card:hover { transform: translateY(-10px); border-color: var(--red); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.founder-img { width: 100%; aspect-ratio: 1; border-radius: 16px; object-fit: cover; margin-bottom: 20px; border: 1px solid var(--border); }
+.founder-name { font-size: 22px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+.role-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+.role-tag { font-family: 'Space Mono', monospace; font-size: 10px; background: var(--bg3); color: var(--red-bright); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border); }
+
+/* Topics Grid */
+.topics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+.topic-card { background: var(--card); border: 1px solid var(--border); padding: 30px 20px; border-radius: 20px; text-align: center; transition: var(--transition); cursor: pointer; }
+.topic-card i { font-size: 32px; color: var(--red-bright); margin-bottom: 15px; display: block; }
+.topic-card:hover { background: var(--red-glow); border-color: var(--red); transform: scale(1.05); }
+.topic-card span { font-weight: 700; font-size: 14px; color: var(--white); }
+
+/* Vision/Mission */
+.vm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.vm-card { padding: 40px; border-radius: 24px; border: 1px solid var(--border); background: var(--card); transition: var(--transition); position: relative; overflow: hidden; }
+.vm-card:hover { border-color: var(--white); }
+.vm-card i { font-size: 40px; margin-bottom: 25px; }
+.vm-card.vision i { color: var(--red); }
+.vm-card.mission i { color: var(--teal); }
+
+/* Contact Form */
+.contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+.contact-info { display: grid; gap: 20px; }
+.contact-method { display: flex; align-items: center; gap: 20px; padding: 20px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; text-decoration: none; color: inherit; transition: var(--transition); }
+.contact-method:hover { border-color: var(--red); transform: translateX(10px); }
+.contact-method i { width: 50px; height: 50px; background: var(--bg3); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--red-bright); font-size: 20px; }
+.contact-method div p:first-child { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase; }
+.contact-method div p:last-child { font-weight: 700; color: var(--white); }
+
+.contact-form { background: var(--card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); display: grid; gap: 20px; }
+.form-group { display: grid; gap: 8px; }
+.form-group label { font-size: 14px; font-weight: 600; color: #888; }
+.form-group input, .form-group textarea { background: var(--bg); border: 1px solid var(--border); padding: 15px; border-radius: 12px; color: white; font-family: inherit; font-size: 15px; transition: var(--transition); }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--red); background: var(--bg2); }
+
+/* ─── FOOTER ─── */
+footer { background: var(--bg2); padding: 80px 5% 40px; border-top: 1px solid var(--border); }
+.footer-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px; }
+.footer-logo-desc p { margin-top: 20px; color: var(--muted); font-size: 15px; max-width: 300px; }
+.footer-links h4 { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--white); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+.footer-links ul { list-style: none; display: grid; gap: 12px; }
+.footer-links a { color: var(--muted); text-decoration: none; transition: var(--transition); font-size: 15px; }
+.footer-links a:hover { color: var(--red-bright); padding-left: 5px; }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-size: 14px; color: #555; }
+.footer-bottom span { color: var(--red-bright); }
+
+/* ─── ANIMATIONS ─── */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVENESS ─── */
+@media (max-width: 1024px) {
+  .contact-container { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  header { padding: 0 20px; }
+  .menu-toggle { display: block; }
+  nav {
+    position: fixed; top: 72px; left: 0; width: 100%; background: var(--bg);
+    flex-direction: column; padding: 40px 20px; border-bottom: 1px solid var(--border);
+    transform: translateY(-150%); transition: var(--transition); z-index: 999;
+  }
+  nav.active { transform: translateY(0); }
+  nav a { width: 100%; text-align: center; font-size: 18px; padding: 15px; }
+  nav .cta-btn { margin-left: 0; margin-top: 10px; }
+  
+  .hero { padding-top: 100px; }
+  .hero h1 { font-size: 50px; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 40px; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .founder-card { padding: 15px; }
+  .vm-card { padding: 30px 20px; }
+  .contact-form { padding: 25px; }
+  .footer-bottom { justify-content: center; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#home" class="logo">
+    <img src="logo.jpeg" alt="GWS Logo">
+    <div class="logo-text">
+      <span>Student-Powered</span>
+      <span>Geek With S</span>
+    </div>
+  </a>
+  <button class="menu-toggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+  <nav>
+    <a href="#home" class="nav-link active">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#content" class="nav-link">Content</a>
+    <a href="#vision" class="nav-link">Vision</a>
+    <a href="#contact" class="btn btn-primary cta-btn">Contact Us</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-tag">Student-Led Technology Media • Sri Lanka</div>
+  <h1>We are <span>GWS</span></h1>
+  <p class="hero-subtitle" id="typed-text"></p>
+  <p class="hero-desc">
+    Empowering the next generation of tech enthusiasts through practical ICT education, project showcases, and industry insights. Simplified learning, driven by students.
+  </p>
+  <div class="hero-btns">
+    <a href="#about" class="btn btn-primary">Discover More <i class="fa-solid fa-arrow-right"></i></a>
+    <a href="#contact" class="btn btn-outline">Let's Connect</a>
+  </div>
+  <div class="topic-pills">
+    <span class="pill">Programming</span>
+    <span class="pill">AI & ML</span>
+    <span class="pill">Cyber Security</span>
+    <span class="pill">Web Dev</span>
+    <span class="pill">Software Engineering</span>
+    <span class="pill">Tech News</span>
+    <span class="pill">Cloud Computing</span>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num" data-count="3">0</div>
+    <div class="stat-label">Founders</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" data-count="8">0</div>
+    <div class="stat-label">Core Topics</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">Sri Lanka</div>
+    <div class="stat-label">Based In</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2026</div>
+    <div class="stat-label">Founded Year</div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-label">The Story</div>
+    <h2 class="section-title">Making Tech Accessible For Everyone</h2>
+    <p class="section-desc">GWS is more than just a channel; it's a student movement in Sri Lanka's tech landscape.</p>
+  </div>
+  
+  <div class="about-card reveal">
+    <b>Geek With S (GWS)</b> is a technology-focused media platform created by passionate students. Our mission is to bridge the gap between theoretical ICT knowledge and real-world application. We simplify complex concepts—from coding to cybersecurity—ensuring that every student, regardless of their background, can master the digital skills required for the future.
+  </div>
+
+  <div class="founders-grid">
+    <!-- Sinura -->
+    <div class="founder-card reveal">
+      <img src="sinura.png" alt="Sinura Perera" class="founder-img">
+      <h3 class="founder-name">Sinura Perera</h3>
+      <div class="role-tags">
+        <span class="role-tag">Graphic Design</span>
+        <span class="role-tag">Web Dev</span>
+        <span class="role-tag">UI/UX</span>
+        <span class="role-tag">AI & ML</span>
+      </div>
+      <p style="color: #888; font-size: 14px;">Driving the technical vision and aesthetic direction of GWS.</p>
+    </div>
+    <!-- Sasmitha -->
+    <div class="founder-card reveal" style="transition-delay: 0.1s;">
+      <img src="sasmitha.jpeg" alt="Sasmitha Ranasinghe" class="founder-img">
+      <h3 class="founder-name">Sasmitha Ranasinghe</h3>
+      <div class="role-tags">
+        <span class="role-tag">Content Strategy</span>
+        <span class="role-tag">Software Dev</span>
+      </div>
+      <p style="color: #888; font-size: 14px;">Crafting engaging educational narratives and software solutions.</p>
+    </div>
+    <!-- Sadew -->
+    <div class="founder-card reveal" style="transition-delay: 0.2s;">
+      <img src="sadew.jpg" alt="Sadew Alvitigala" class="founder-img">
+      <h3 class="founder-name">Sadew Alvitigala</h3>
+      <div class="role-tags">
+        <span class="role-tag">Tech Innovation</span>
+        <span class="role-tag">Gaming</span>
+      </div>
+      <p style="color: #888; font-size: 14px;">Exploring cutting-edge hardware and interactive entertainment.</p>
+    </div>
+  </div>
+</section>
+
+<section id="content" style="background: var(--bg2);">
+  <div class="section-header reveal">
+    <div class="section-label">Curriculum</div>
+    <h2 class="section-title">What We Cover</h2>
+  </div>
+  <div class="topics-grid reveal">
+    <div class="topic-card"><i class="fa-solid fa-code"></i><span>Programming</span></div>
+    <div class="topic-card"><i class="fa-solid fa-brain"></i><span>AI & ML</span></div>
+    <div class="topic-card"><i class="fa-solid fa-shield-halved"></i><span>Cyber Security</span></div>
+    <div class="topic-card"><i class="fa-solid fa-globe"></i><span>Web Dev</span></div>
+    <div class="topic-card"><i class="fa-solid fa-microchip"></i><span>Hardware</span></div>
+    <div class="topic-card"><i class="fa-solid fa-newspaper"></i><span>Tech News</span></div>
+    <div class="topic-card"><i class="fa-solid fa-cloud"></i><span>Cloud</span></div>
+    <div class="topic-card"><i class="fa-solid fa-robot"></i><span>Robotics</span></div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="vm-grid">
+    <div class="vm-card vision reveal">
+      <i class="fa-solid fa-eye"></i>
+      <div class="section-label" style="color:var(--red-bright)">Vision</div>
+      <h3 class="founder-name" style="font-size:28px">Leading the Future</h3>
+      <p style="color:#aaa">To become Sri Lanka's premier student-driven ICT hub, inspiring innovation and digital literacy across the nation.</p>
+    </div>
+    <div class="vm-card mission reveal" style="transition-delay: 0.1s;">
+      <i class="fa-solid fa-rocket"></i>
+      <div class="section-label" style="color:var(--teal)">Mission</div>
+      <h3 class="founder-name" style="font-size:28px">Educate & Empower</h3>
+      <p style="color:#aaa">Providing high-quality, free technology education that empowers students to build, create, and solve global problems.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-label">Connect</div>
+    <h2 class="section-title">Get In Touch</h2>
+  </div>
+  <div class="contact-container">
+    <div class="contact-info reveal">
+      <a href="mailto:1geekwiths@gmail.com" class="contact-method">
+        <i class="fa-solid fa-envelope"></i>
+        <div>
+          <p>Email Us</p>
+          <p>1geekwiths@gmail.com</p>
+        </div>
+      </a>
+      <a href="https://youtube.com/@GeekWithS" target="_blank" class="contact-method">
+        <i class="fa-brands fa-youtube"></i>
+        <div>
+          <p>Subscribe</p>
+          <p>Geek With S (GWS)</p>
+        </div>
+      </a>
+      <a href="https://github.com/GeekWithS" target="_blank" class="contact-method">
+        <i class="fa-brands fa-github"></i>
+        <div>
+          <p>Open Source</p>
+          <p>GeekWithS</p>
+        </div>
+      </a>
+      <div class="contact-method">
+        <i class="fa-solid fa-location-dot"></i>
+        <div>
+          <p>Location</p>
+          <p>Colombo, Sri Lanka</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" onsubmit="event.preventDefault(); handleSend();">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="name" required placeholder="Sinura Perera">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" required placeholder="sinura@example.com">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="message" rows="5" required placeholder="How can we help you?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+      <p id="status" style="margin-top:10px; font-size:14px; font-weight:700;"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo-desc">
+      <a href="#home" class="logo">
+        <img src="logo.jpeg" alt="GWS Logo">
+        <div class="logo-text">
+          <span>Student-Powered</span>
+          <span>Geek With S</span>
+        </div>
+      </a>
+      <p>Building the next generation of tech leaders in Sri Lanka through accessible and engaging media.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#content">Content</a></li>
+        <li><a href="#vision">Vision</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://youtube.com/@GeekWithS">YouTube</a></li>
+        <li><a href="https://github.com/GeekWithS">GitHub</a></li>
+        <li><a href="mailto:1geekwiths@gmail.com">Email</a></li>
+        <li><a href="https://geekwiths.github.io/GWS/">Website</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 <span>Geek With S</span>. All rights reserved.</p>
+    <p>Handcrafted with <i class="fa-solid fa-heart" style="color:var(--red); font-size:12px;"></i> by GWS Team</p>
+  </div>
+</footer>
+
+<script>
+// ── MOBILE MENU TOGGLE ──
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('nav');
+const navLinks = document.querySelectorAll('nav a');
+
+menuToggle.addEventListener('click', () => {
+  nav.classList.toggle('active');
+  menuToggle.innerHTML = nav.classList.contains('active') ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+});
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('active');
+    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+
+    navLinks.forEach(l => l.classList.remove('active'));
+    if (link.classList.contains('nav-link')) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// ── TYPEWRITER EFFECT ──
+const phrases = [
+  "Programming · AI · Cyber Security",
+  "Web Development · Tech News",
+  "ICT Tutorials · Robotics",
+  "Student-Powered · Sri Lanka"
+];
+let pi = 0, ci = 0, deleting = false;
+const el = document.getElementById('typed-text');
+
+function type() {
+  const current = phrases[pi];
+  if (!deleting) {
+    el.innerHTML = current.slice(0, ci + 1) + '<span class="typed-cursor">|</span>';
+    ci++;
+    if (ci === current.length) { deleting = true; setTimeout(type, 2000); return; }
+  } else {
+    el.innerHTML = current.slice(0, ci - 1) + '<span class="typed-cursor">|</span>';
+    ci--;
+    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+  }
+  setTimeout(type, deleting ? 30 : 60);
+}
+setTimeout(type, 1000);
+
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── STATS COUNTER ──
+function animateCount(el, target) {
+  let start = 0;
+  const duration = 2000;
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    el.textContent = Math.floor(progress * target);
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-count]').forEach(n => animateCount(n, parseInt(n.dataset.count)));
+      statsObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+statsObserver.observe(document.querySelector('.stats-bar'));
+
+// ── CONTACT SENDING (EmailJS) ──
+(function(){
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  s.onload = () => emailjs.init({ publicKey: 'Cf3MmyxrchdKfh6cq' });
+  document.head.appendChild(s);
+})();
+
+async function handleSend() {
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('status');
+  const data = {
+    from_name: document.getElementById('name').value,
+    from_email: document.getElementById('email').value,
+    message: document.getElementById('message').value
+  };
+
+  btn.disabled = true;
+  status.textContent = "Sending your message...";
+  status.style.color = "var(--muted)";
+
+  try {
+    await emailjs.send('service_sfn00cn', 'template_3e3gd6a', data);
+    status.textContent = "Success! We'll get back to you soon.";
+    status.style.color = "#4caf50";
+    document.getElementById('contactForm').reset();
+  } catch (err) {
+    status.textContent = "Failed to send. Please try again.";
+    status.style.color = "var(--red-bright)";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="FFHBJ-umgvX0GvGyQQQDP";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+</script>
+
+</body>
+</html>
